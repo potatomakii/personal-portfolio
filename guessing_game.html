@@ -24,87 +24,90 @@
 #include <stdlib.h>
 #include <time.h>
 
+int main() {
+    int n, m;  
+    int rn, guess, tries, t;  
+    char again, d; 
+    char name[50]; 
+    
+    printf("Hello! What's your name?: ");
+    scanf("%s", name);  
 
-int main(){
-   
-  int rn, guess, t, tries, j, i, n, m; 
-  char again, d;
-  char name[50];
-  
     srand(time(0));
-   
-   printf("what's your name?: ");
-   scanf("%s", &name);
-   
-  while(d != 'e' && d != 'E' && d != 'm' && d != 'M' && d != 'h' && d != 'H'){
-   printf("difficulty level: (E/M/H): ");
-   scanf(" %c", &d);
-   
+    
+    do {  
+        d = '\0'; 
 
-   if(d == 'e' || d =='E'){
-       m = 50;
-       n = 1;
-   }else if(d == 'm' || d == 'M'){
-       m = 100;
-       n = 1;
-   }
-   else if(d == 'h' || d == 'H'){
-       m = 1000;
-       n = 1;
-   }else{
-       printf("invalid try again\n");
-   }
-  }
-   
-   
-   do{ 
-    rn = rand() % m + n;
-    guess = 0;
-    t = 0;
-    tries = 10;
-    j = 2;
-    i = j*j;
+        while(d != 'e' && d != 'E' && d != 'm' && d != 'M' && d != 'h' && d != 'H') {
+            printf("\n---------------------------------------\n");
+            printf("E = Easy | M = Medium | H = Hard\n");
+            printf("Difficulty level (E/M/H): ");
+            scanf(" %c", &d);  
+            
+            if(d == 'e' || d == 'E') {
+                m = 50;
+                n = 1;
+            } else if(d == 'm' || d == 'M') {
+                m = 100;
+                n = 1;
+            } else if(d == 'h' || d == 'H') {
+                m = 1000;
+                n = 1;
+            } else {
+                printf("Invalid choice, try again.\n");
+            }
+        }
+        
+        rn = rand() % (m - n + 1) + n;  
+        guess = 0;       
+        tries = 10;      
+        t = 0;           
+
+        printf("\n========================================\n");
+        printf("Welcome to the Number Guessing Game %s!\n", name);
+        printf("Guess a number between %d and %d\n", n, m);
+        printf("You have 10 chances to guess the number.\n");
+        printf("If your guess is incorrect, try again!\n");
+        printf("Enjoy playing!!!\n");
+        printf("========================================\n");
     
+        while(guess != rn && tries > 0) {
+            t++;             
+            tries--;         
+            
+            printf("Enter your guess: "); 
+            
+            if(scanf("%d", &guess) != 1) {
+                printf("Invalid input! Enter a number.\n");
+                while(getchar() != '\n'); 
+                continue; 
+            }
+            
+            if(guess > rn) {
+                printf("\nToo High, Try Again.         Tries Left: %d\n", tries);
+            } else if(guess < rn) {
+                printf("\nToo Low, Try Again.          Tries Left: %d\n", tries);
+            } else if(guess == rn) {
+                printf("\nCongratulations %s! You got it in %d tries.\n", name, t);
+                break; 
+            }
+
+            if(tries == 0 && guess != rn) {
+                printf("\nOops! You're out of tries. The number was %d\n", rn);
+            }
+        }
+
+        printf("\n%s, do you want to play again? (y/n): ", name);
+        scanf(" %c", &again); 
     
-    printf("\nwelcome to number guessing game!\n");
-    printf("think a number between %d-%d\n", n, m);
-    
-    while(guess != rn && tries > 0){
-        t++;
-        tries--;
-        printf("enter a number: ");
-        scanf("%d", &guess);
-        if(guess > rn){
-            printf("\ntoo high, try again       tries left:%d\n", tries);
-        }
-        else if(guess < rn){
-            printf("\ntoo low, try again        tries left:%d\n", tries);
-        }
-        else if(guess == rn){
-            printf("\ncongrats you got it in %d tries\n", t);
-            break;
-        }
-        if(tries == 0){
-            printf("\nyou're out of tries, the number is %d\n", rn);
-            continue;
-        }
-        }
-        if(rn % i == 0){
-            printf("random number is not prime\n");
-        }
-        else{
-            printf("random number is prime!\n");
-        }
-    
-   
-    printf("\ndo you want to play again?(y/n): ");
-    scanf(" %c", &again);
-   }while(again == 'y' || again == 'Y');
-   
-   printf("\nbye");
+    } while(again == 'y' || again == 'Y');
+
+    printf("\nThank you for playing, %s!\n", name);
     
     return 0;
 }
+
+
         </code></pre>
 	</div>
         <p>You can run this code in any C compiler to see the results.</p>
@@ -117,3 +120,4 @@ int main(){
 
 </body>
 </html>
+
