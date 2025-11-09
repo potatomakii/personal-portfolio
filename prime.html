@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Numbers Project | MG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<main>
+    <section>
+        <h2>Prime Numbers Finders in C</h2>
+        <p>This is a C program that finds prime numbers between two numbers entered by the user.</p>
+        <h3>Code:</h3>
+ <div class="code-container">
+
+        <pre><code>
+#include <stdio.h>
+
+int main(){
+    
+    int first, last, i, j, prime, count;
+    float temp;
+    
+    do{
+        printf("enter the first number: ");
+        if(scanf("%f", &temp) != 1 || temp != (int)temp || temp < 0){
+            printf("invalid, enter positivie whole number\n\n");
+            while(getchar() != '\n');
+            continue;
+        }
+        
+        first = (int)temp;
+        
+        
+        printf("enter the last number: ");
+        if(scanf("%f", &temp) != 1 || temp != (int)temp || temp < 0 || temp > 1000){
+            printf("invalid, enter positivie whole number\n\n");
+            while(getchar() != '\n');
+            continue;
+        }
+        
+        last = (int)temp;
+        
+        if(first > last){
+            printf("make sure first number is less than or equal to last number\n");
+        }
+        
+    }while(first < 0 || last < 0 || first > last);
+    
+    printf("prime number are:\n");
+    
+    count = 0;
+    for(i = first; i <= last; i++){
+        if(i < 2)
+        continue;
+        
+        prime = 1;
+        
+        for(j = 2; j * j <= i; j++){
+        if(i % j == 0){
+            prime = 0;
+            break;
+        }
+        } 
+        if(prime){
+            printf("%d ", i);
+            count++;
+        }
+        
+    }
+    
+    if(count == 0)
+        printf("no prime number found");
+    
+    else printf("count:%d", count);
+    
+return 0;
+}       
+ </code></pre>
+	</div>
+        <p>You can run this code in any C compiler to see the results.</p>
+    </section>
+</main>
+
+<footer>
+    © 2025 MG | Software Developer
+</footer>
+
+</body>
+</html>
